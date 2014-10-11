@@ -315,9 +315,9 @@
 - (void)print {
     NSUInteger count = 0;
     for (NSArray *edges in nodeEdges) {
-        NSLog(@"node %d", count);
+        NSLog(@"node %lu", (unsigned long)count);
         for (GraphEdge *edge in edges) {
-            NSLog(@"%d=>%d", edge.from, edge.to);
+            NSLog(@"%lu=>%lu", (unsigned long)edge.from, (unsigned long)edge.to);
         }
         count++;
     }

@@ -18,8 +18,8 @@
     NavGraphNode *node2 = (NavGraphNode *)b;
     
     // calculate manhattan distance
-    NSInteger deltaX = node2.position.x - node1.position.x;
-    NSInteger deltaY = node2.position.y - node1.position.y;
+    int deltaX = node2.position.x - node1.position.x;
+    int deltaY = node2.position.y - node1.position.y;
     double dist = abs(deltaX) + abs(deltaY);
     return dist;
 }

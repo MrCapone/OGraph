@@ -25,7 +25,7 @@
         keys = aKeys;
         maxSize = aMaxSize;
         size = 0;
-        int capacity = maxSize + 1;
+        int capacity = (int)maxSize + 1;
         // we use calloc to zero out the array
         heap = (NSUInteger *)calloc(capacity, sizeof(NSUInteger));
         invHeap = (NSUInteger *)calloc(capacity, sizeof(NSUInteger));

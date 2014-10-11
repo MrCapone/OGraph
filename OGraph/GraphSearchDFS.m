@@ -76,7 +76,7 @@ NSNumber *kNoParentAssigned;
         //NSLog(@"popping edge %d=>%d", next.from, next.to);
         
         // make a note of the parent of the node this edge points to
-        [routeNodeIndexes replaceObjectAtIndex:next.to withObject:[NSNumber numberWithInt:next.from]];
+        [routeNodeIndexes replaceObjectAtIndex:next.to withObject:[NSNumber numberWithInt:(int)next.from]];
         
         // and mark it as visited
         [visitedNodeIndexes replaceObjectAtIndex:next.to withObject:kVisited];

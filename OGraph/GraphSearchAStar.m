@@ -140,13 +140,13 @@ static NSNull *kNull;
     //    }
     
     NSUInteger nd = targetNodeIndex;
-    [path insertObject:[NSNumber numberWithUnsignedInt:nd] atIndex:0];
+    [path insertObject:[NSNumber numberWithUnsignedInt:(int)nd] atIndex:0];
     
     while (nd != sourceNodeIndex && 
            [shortestPathTree objectAtIndex:nd] != kNull) {
         GraphEdge *edge = [shortestPathTree objectAtIndex:nd];
         nd = edge.from;
-        [path insertObject:[NSNumber numberWithUnsignedInt:nd] atIndex:0];
+        [path insertObject:[NSNumber numberWithUnsignedInt:(int)nd] atIndex:0];
     }
     
     return [path autorelease];
