@@ -45,7 +45,7 @@
     id<Heuristic> heuristic;
 }
 
-@property (nonatomic, retain) SparseGraph *graph;
+@property (nonatomic, strong) SparseGraph *graph;
 
 - (id)initWithGraph:(SparseGraph *)aGraph
     sourceNodeIndex:(NSUInteger)aSourceNodeIndex    

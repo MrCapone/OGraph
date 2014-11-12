@@ -58,7 +58,7 @@
 		0B6752E0137481C100C4BEC8 /* libOGraph.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOGraph.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6752E3137481C100C4BEC8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0B6752E7137481C100C4BEC8 /* OGraph-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OGraph-Prefix.pch"; sourceTree = "<group>"; };
-		0B6752ED137481C100C4BEC8 /* OGraphTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OGraphTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B6752ED137481C100C4BEC8 /* OGraphTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OGraphTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6752EE137481C100C4BEC8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0B6752F1137481C100C4BEC8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0B6752F8137481C100C4BEC8 /* OGraphTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OGraphTests-Info.plist"; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				0B6752E0137481C100C4BEC8 /* libOGraph.a */,
-				0B6752ED137481C100C4BEC8 /* OGraphTests.octest */,
+				0B6752ED137481C100C4BEC8 /* OGraphTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,8 +275,8 @@
 			);
 			name = OGraphTests;
 			productName = OGraphTests;
-			productReference = 0B6752ED137481C100C4BEC8 /* OGraphTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = 0B6752ED137481C100C4BEC8 /* OGraphTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -422,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/OGraph.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OGraph/OGraph-Prefix.pch";
@@ -436,6 +437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/OGraph.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OGraph/OGraph-Prefix.pch";
@@ -450,20 +452,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OGraphTests/OGraphTests-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "OGraphTests/OGraphTests-Info.plist";
-				OTHER_LDFLAGS = (
-					"-framework",
-					SenTestingKit,
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -471,20 +469,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OGraphTests/OGraphTests-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "OGraphTests/OGraphTests-Info.plist";
-				OTHER_LDFLAGS = (
-					"-framework",
-					SenTestingKit,
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

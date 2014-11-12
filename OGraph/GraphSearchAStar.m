@@ -58,10 +58,6 @@ static NSNull *kNull;
 - (void)dealloc {
     free(gCosts);
     free(fCosts);
-    [graph release];
-    [shortestPathTree release];
-    [searchFrontier release];
-    [super dealloc];
 }
 
 - (void)search {
@@ -124,7 +120,6 @@ static NSNull *kNull;
             }
         }
     }
-    [pq release];
 }
 
 - (NSArray *)getSPT {
@@ -149,7 +144,7 @@ static NSNull *kNull;
         [path insertObject:[NSNumber numberWithUnsignedInt:(int)nd] atIndex:0];
     }
     
-    return [path autorelease];
+    return path;
 }
 
 - (double)getCostToNodeIndex:(NSUInteger)idx {

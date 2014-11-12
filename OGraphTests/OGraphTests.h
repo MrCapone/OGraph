@@ -6,10 +6,10 @@
 //  Copyright 2011 n/a. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 
-@interface OGraphTests : SenTestCase {
+@interface OGraphTests : XCTestCase {
 @private
     
 }

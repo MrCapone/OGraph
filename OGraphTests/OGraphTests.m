@@ -45,7 +45,7 @@
     [graph addNodeWithIndex:0];
     [graph addNodeWithIndex:1];
     [graph addEdgeFrom:0 to:1];
-    return [graph autorelease];
+    return graph;
 }
 
 + (SparseGraph *)minimalNavGraph {
@@ -55,53 +55,50 @@
     [graph addNode:node1];
     [graph addNode:node2];
     [graph addEdgeFrom:0 to:1];
-    [node1 release];
-    [node2 release];
-    return [graph autorelease];
+    return graph;
 }
 
 - (void)testSparseGraph {
     SparseGraph *graph = [OGraphTests minimalDigraph];
     
     // simple existence checks
-    STAssertEquals(graph.numNodes, 2U, nil);
-    STAssertEquals(graph.numActiveNodes, 2U, nil);
-    STAssertEquals(graph.numEdges, 1U, nil);
-    STAssertTrue([graph isNodePresentWithIndex:0], nil);
-    STAssertTrue([graph isNodePresentWithIndex:1], nil);
-    STAssertFalse([graph isNodePresentWithIndex:3], nil);
-    STAssertTrue([graph isEdgePresentWithFrom:0 to:1], nil);    
-    STAssertFalse([graph isEdgePresentWithFrom:1 to:0], nil);    
+    XCTAssertEqual(graph.numNodes, 2U);
+    XCTAssertEqual(graph.numActiveNodes, 2U);
+    XCTAssertEqual(graph.numEdges, 1U);
+    XCTAssertTrue([graph isNodePresentWithIndex:0]);
+    XCTAssertTrue([graph isNodePresentWithIndex:1]);
+    XCTAssertFalse([graph isNodePresentWithIndex:3]);
+    XCTAssertTrue([graph isEdgePresentWithFrom:0 to:1]);    
+    XCTAssertFalse([graph isEdgePresentWithFrom:1 to:0]);    
     
     // remove an edge
     [graph removeEdgeWithFrom:0 to:1];
-    STAssertEquals(graph.numEdges, 0U, nil);
-    STAssertFalse([graph isEdgePresentWithFrom:0 to:1], nil);    
-    STAssertEquals(graph.numEdges, 0U, nil);
+    XCTAssertEqual(graph.numEdges, 0U);
+    XCTAssertFalse([graph isEdgePresentWithFrom:0 to:1]);    
+    XCTAssertEqual(graph.numEdges, 0U);
     
     // put it back
     GraphEdge *e0 = [[GraphEdge alloc] initWithFrom:0 to:1];
     [graph addEdge:e0];
-    [e0 release];
-    STAssertTrue([graph isEdgePresentWithFrom:0 to:1], nil);    
-    STAssertEquals(graph.numEdges, 1U, nil);
+    XCTAssertTrue([graph isEdgePresentWithFrom:0 to:1]);    
+    XCTAssertEqual(graph.numEdges, 1U);
     
     // remove a node, which should only deactivate the node
     [graph removeNodeWithIndex:1];
-    STAssertEquals(graph.numNodes, 2U, nil);
-    STAssertEquals(graph.numActiveNodes, 1U, nil);
+    XCTAssertEqual(graph.numNodes, 2U);
+    XCTAssertEqual(graph.numActiveNodes, 1U);
     // but, it should nuke our edge, too
-    STAssertEquals(graph.numEdges, 0U, nil);
-    STAssertFalse([graph isEdgePresentWithFrom:0 to:1], nil);    
+    XCTAssertEqual(graph.numEdges, 0U);
+    XCTAssertFalse([graph isEdgePresentWithFrom:0 to:1]);    
     
     // clear
     [graph clear];
-    STAssertEquals(graph.numNodes, 0U, nil);
-    STAssertEquals(graph.numActiveNodes, 0U, nil);
-    STAssertEquals(graph.numEdges, 0U, nil);
-    STAssertFalse([graph isNodePresentWithIndex:0], nil);
-    STAssertFalse([graph isNodePresentWithIndex:1], nil);
-    STAssertFalse([graph isEdgePresentWithFrom:0 to:1], nil);    
+    XCTAssertEqual(graph.numNodes, 0U);
+    XCTAssertEqual(graph.numActiveNodes, 0U);
+    XCTAssertEqual(graph.numEdges, 0U);
+    XCTAssertFalse([graph isNodePresentWithIndex:0]);
+    XCTAssertFalse([graph isNodePresentWithIndex:1]);
+    XCTAssertFalse([graph isEdgePresentWithFrom:0 to:1]);    
 }
 
 - (void)testSimpleDirectedDFS {
@@ -109,14 +106,13 @@
     SparseGraph *graph = [OGraphTests minimalDigraph];
     
     GraphSearchDFS *dfs = [[GraphSearchDFS alloc] initWithGraph:graph sourceNodeIndex:0 targetNodeIndex:1];
-    STAssertTrue(dfs.pathToTargetFound, nil);
+    XCTAssertTrue(dfs.pathToTargetFound);
     NSArray *path = [dfs getPathToTarget];
     // path should be of 2 elements, from node 0 (source) to node 1 (target)
-    STAssertEquals([path count], 2U, nil);
-    STAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:0], nil);
-    STAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:1], nil);
+    XCTAssertEqual([path count], 2U);
+    XCTAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:0]);
+    XCTAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:1]);
     
-    [graph release];
 }
 
 + (SparseGraph *)sampleUndirectedGraph {
@@ -135,40 +131,38 @@
     [graph addEdgeFrom:3 to:4];
     [graph addEdgeFrom:3 to:5];
     [graph addEdgeFrom:4 to:5];
-    return [graph autorelease];
+    return graph;
 }
 
 - (void)testUndirectedDFS {
     SparseGraph *graph = [OGraphTests sampleUndirectedGraph];
     GraphSearchDFS *dfs = [[GraphSearchDFS alloc] initWithGraph:graph sourceNodeIndex:4 targetNodeIndex:2];
     
-    STAssertTrue(dfs.pathToTargetFound, nil);
+    XCTAssertTrue(dfs.pathToTargetFound);
     NSArray *path = [dfs getPathToTarget];
     // note that the order we add edges will affect the order edges are pushed 
     // onto our search stack, and thus ultimately the order of the DFS.
     // With the edge-adding order above, we end up with 4=>5=>3=>2
-    STAssertEquals([path count], 4U, nil);
-    STAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:4], nil);
-    STAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:5], nil);
-    STAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:3], nil);
-    STAssertEqualObjects([path objectAtIndex:3], [NSNumber numberWithInt:2], nil);
+    XCTAssertEqual([path count], 4U);
+    XCTAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:4]);
+    XCTAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:5]);
+    XCTAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:3]);
+    XCTAssertEqualObjects([path objectAtIndex:3], [NSNumber numberWithInt:2]);
     
-    [dfs release];
 }
 
 - (void)testUndirectedBFS {
     SparseGraph *graph = [OGraphTests sampleUndirectedGraph];
     GraphSearchBFS *bfs = [[GraphSearchBFS alloc] initWithGraph:graph sourceNodeIndex:4 targetNodeIndex:2];
     
-    STAssertTrue(bfs.pathToTargetFound, nil);
+    XCTAssertTrue(bfs.pathToTargetFound);
     NSArray *path = [bfs getPathToTarget];
     // BFS path is 4=>3=>2
-    STAssertEquals([path count], 3U, nil);
-    STAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:4], nil);
-    STAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:3], nil);
-    STAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:2], nil);
+    XCTAssertEqual([path count], 3U);
+    XCTAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:4]);
+    XCTAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:3]);
+    XCTAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:2]);
     
-    [bfs release];
 }
 
 + (SparseGraph *)twoRouteCostedDigraph {
@@ -183,7 +177,7 @@
     [graph addEdgeFrom:0 to:2 cost:1.0];
     [graph addEdgeFrom:1 to:3 cost:0.5];
     [graph addEdgeFrom:2 to:3 cost:1.0];
-    return [graph autorelease];
+    return graph;
 }
 
 + (SparseGraph *)complicatedCostedDigraph {
@@ -204,7 +198,7 @@
     [graph addEdgeFrom:4 to:1 cost:1.9];
     [graph addEdgeFrom:4 to:5 cost:3.0];
     [graph addEdgeFrom:5 to:3 cost:1.1];
-    return [graph autorelease];
+    return graph;
 }
 
 - (void)testEasyDijkstra {
@@ -213,12 +207,11 @@
     NSArray *path = [dij getPathToTarget];
     // our test digraph has 2 routes from 0=>3: 0=>2=>3 costing 2.0, and 0=>1=>3 costing 1.5.
     // Make sure our search picks the cheaper route of 1.5.
-    STAssertEquals([path count], 3U, nil);
-    STAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:0], nil);
-    STAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:1], nil);
-    STAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:3], nil);
-    STAssertEquals([dij getCostToTarget], 1.5, nil);
-    [dij release];
+    XCTAssertEqual([path count], 3U);
+    XCTAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:0]);
+    XCTAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:1]);
+    XCTAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:3]);
+    XCTAssertEqual([dij getCostToTarget], 1.5);
 }
 
 - (void)testComplicatedDijkstra {
@@ -226,12 +219,11 @@
     GraphSearchDijkstra *dij = [[GraphSearchDijkstra alloc] initWithGraph:graph sourceNodeIndex:4 targetNodeIndex:2];
     NSArray *path = [dij getPathToTarget];
     // cheapest path from 4=>2 is 4=>1=>2, with a total cost of 5.0
-    STAssertEquals([path count], 3U, nil);
-    STAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:4], nil);
-    STAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:1], nil);
-    STAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:2], nil);
-    STAssertEquals([dij getCostToTarget], 5.0, nil);
-    [dij release];
+    XCTAssertEqual([path count], 3U);
+    XCTAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:4]);
+    XCTAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:1]);
+    XCTAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:2]);
+    XCTAssertEqual([dij getCostToTarget], 5.0);
 }
 
 + (SparseGraph *)threeByThreeNavGraph {
@@ -249,7 +241,6 @@
             CGPoint pos = CGPointMake(col * 50.0, row * 50.0);
             NavGraphNode *n = [[NavGraphNode alloc] initWithIndex:idx position:pos];
             [graph addNode:n];
-            [n release];
             idx++;
         }
     }
@@ -272,7 +263,7 @@
     [graph addEdgeFrom:5 to:8];
     [graph addEdgeFrom:6 to:7];
     [graph addEdgeFrom:7 to:8];
-    return [graph autorelease];
+    return graph;
 }
 
 // Convenience method to test AStar with a given    heuristic
@@ -285,13 +276,12 @@
                                                             heuristic:heuristic];
     NSArray *path = [aStar getPathToTarget];
     // best path will be straight up the middle column: 7=>4=>1
-    STAssertEquals([path count], 3U, nil);
-    STAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:7], nil);
-    STAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:4], nil);
-    STAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:1], nil);
+    XCTAssertEqual([path count], 3U);
+    XCTAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:7]);
+    XCTAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:4]);
+    XCTAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:1]);
     
     // do another search
-    [aStar release];
     // find a path from our lower-left (6) to our upper right (2)
     aStar = [[GraphSearchAStar alloc] initWithGraph:graph 
                                     sourceNodeIndex:6 
@@ -299,24 +289,21 @@
                                           heuristic:heuristic];
     path = [aStar getPathToTarget];
     // best path will be the diagonal: 6=>4=>2
-    STAssertEquals([path count], 3U, nil);
-    STAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:6], nil);
-    STAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:4], nil);
-    STAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:2], nil);
+    XCTAssertEqual([path count], 3U);
+    XCTAssertEqualObjects([path objectAtIndex:0], [NSNumber numberWithInt:6]);
+    XCTAssertEqualObjects([path objectAtIndex:1], [NSNumber numberWithInt:4]);
+    XCTAssertEqualObjects([path objectAtIndex:2], [NSNumber numberWithInt:2]);
     
-    [aStar release];    
 }
 
 - (void)testAStarWithEuclid {
     HeuristicEuclid *heuristic = [[HeuristicEuclid alloc] init];
     [self aStarWithHeuristic:heuristic];
-    [heuristic release];
 }
 
 - (void)testAStarWithManhattan {
     HeuristicManhattan *heuristic = [[HeuristicManhattan alloc] init];
     [self aStarWithHeuristic:heuristic];
-    [heuristic release];
 }
 
 - (void)testArchiveAndNewFromFile {
@@ -332,17 +319,16 @@
     SparseGraph *graph = [SparseGraph newFromFile:archivePath];
     
     // make sure it's the graph we expect
-    STAssertNotNil(graph, nil);    
-    STAssertEquals(graph.numNodes, 2U, nil);
-    STAssertEquals(graph.numActiveNodes, 2U, nil);
-    STAssertEquals(graph.numEdges, 1U, nil);
-    STAssertTrue([graph isNodePresentWithIndex:0], nil);
-    STAssertTrue([graph isNodePresentWithIndex:1], nil);
-    STAssertFalse([graph isNodePresentWithIndex:2], nil);
-    STAssertTrue([graph isEdgePresentWithFrom:0 to:1], nil);    
-    STAssertFalse([graph isEdgePresentWithFrom:1 to:0], nil);    
+    XCTAssertNotNil(graph);    
+    XCTAssertEqual(graph.numNodes, 2U);
+    XCTAssertEqual(graph.numActiveNodes, 2U);
+    XCTAssertEqual(graph.numEdges, 1U);
+    XCTAssertTrue([graph isNodePresentWithIndex:0]);
+    XCTAssertTrue([graph isNodePresentWithIndex:1]);
+    XCTAssertFalse([graph isNodePresentWithIndex:2]);
+    XCTAssertTrue([graph isEdgePresentWithFrom:0 to:1]);    
+    XCTAssertFalse([graph isEdgePresentWithFrom:1 to:0]);    
     
-    [graph release];
  
     // remove test file
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -362,18 +348,17 @@
     SparseGraph *graph = [SparseGraph newFromFile:archivePath];
     
     // make sure it's the graph we expect
-    STAssertNotNil(graph, nil);    
-    STAssertEquals(graph.numNodes, 2U, nil);
-    STAssertEquals(graph.numActiveNodes, 2U, nil);
+    XCTAssertNotNil(graph);    
+    XCTAssertEqual(graph.numNodes, 2U);
+    XCTAssertEqual(graph.numActiveNodes, 2U);
     // undirected graph, so edges to and from
-    STAssertEquals(graph.numEdges, 2U, nil);
-    STAssertTrue([graph isNodePresentWithIndex:0], nil);
-    STAssertTrue([graph isNodePresentWithIndex:1], nil);
-    STAssertFalse([graph isNodePresentWithIndex:2], nil);
-    STAssertTrue([graph isEdgePresentWithFrom:0 to:1], nil);    
-    STAssertTrue([graph isEdgePresentWithFrom:1 to:0], nil);    
+    XCTAssertEqual(graph.numEdges, 2U);
+    XCTAssertTrue([graph isNodePresentWithIndex:0]);
+    XCTAssertTrue([graph isNodePresentWithIndex:1]);
+    XCTAssertFalse([graph isNodePresentWithIndex:2]);
+    XCTAssertTrue([graph isEdgePresentWithFrom:0 to:1]);    
+    XCTAssertTrue([graph isEdgePresentWithFrom:1 to:0]);    
     
-    [graph release];
 
     // remove test file
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -390,9 +375,7 @@
                                                       targetNodeIndex:870 
                                                             heuristic:heuristic];
     NSArray *path = [aStar getPathToTarget];
-    STAssertNotNil(path, nil);    
-    [heuristic release];
-    [graph release];
+    XCTAssertNotNil(path);    
 }
 
 @end

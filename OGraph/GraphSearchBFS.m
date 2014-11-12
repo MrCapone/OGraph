@@ -54,19 +54,14 @@ NSNumber *kNoParentAssigned;
     return self;
 }
 
-- (void)dealloc {
-    [graph release];
-    [super dealloc];
-}
 
 - (BOOL)search {
     // FIFO queue of edges
-    NSMutableArray *queue = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *queue = [[NSMutableArray alloc] init];
     
     // create a dummy edge and put it on the stack
     GraphEdge *dummy = [[GraphEdge alloc] initWithFrom:sourceNodeIndex to:sourceNodeIndex];
     [queue addObject:dummy];
-    [dummy release];
     
     // while there are edges on the stack keep searching
     while ([queue count] > 0) {

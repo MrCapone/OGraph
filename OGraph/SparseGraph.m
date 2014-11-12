@@ -39,11 +39,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [nodes release];
-    [nodeEdges release];
-    [super dealloc];
-}
 
 - (NSUInteger)numNodes {
     return [nodes count];
@@ -109,7 +104,6 @@
 - (NSUInteger)addNodeWithIndex:(NSUInteger)index {
     GraphNode *node = [[GraphNode alloc] initWithIndex:index];
     NSUInteger retVal = [self addNode:node];
-    [node release];
     return retVal;
 }
 
@@ -134,7 +128,6 @@
         [nodes addObject:node];
         NSMutableArray *edges = [[NSMutableArray alloc] init];
         [nodeEdges addObject:edges];
-        [edges release];
         return nextNodeIndex++;
     }
 }
@@ -177,20 +170,17 @@
             [toCull removeAllObjects];
         }
     }
-    [toCull release];
 }
 
 // convenience method to add an edge
 - (void)addEdgeFrom:(NSUInteger)from to:(NSUInteger)to {
     GraphEdge *edge = [[GraphEdge alloc] initWithFrom:from to:to];
     [self addEdge:edge];
-    [edge release];
 }
 
 - (void)addEdgeFrom:(NSUInteger)from to:(NSUInteger)to cost:(double)cost {
     GraphEdge *edge = [[GraphEdge alloc] initWithFrom:from to:to cost:cost];
     [self addEdge:edge];
-    [edge release];    
 }
 
 /**
@@ -224,7 +214,6 @@
         if ([self isEdgeUniqueWithFrom:edge.to to:edge.from]) {
             GraphEdge *oppositeEdge = [[GraphEdge alloc] initWithFrom:edge.to to:edge.from];
             [[nodeEdges objectAtIndex:edge.to] addObject:oppositeEdge];
-            [oppositeEdge release];
         }
     }
 }
@@ -259,7 +248,6 @@
         [toRemove removeAllObjects];
     }
     
-    [toRemove release];
 }
 
 - (BOOL)isNodePresentWithIndex:(NSUInteger)index {
@@ -330,8 +318,8 @@
     if (self) {
         isDigraph = [coder decodeBoolForKey:@"SGIsDigraph"];
         nextNodeIndex = (NSUInteger)[coder decodeIntegerForKey:@"SGNextNodeIndex"];
-        nodes = [[coder decodeObjectForKey:@"SGNodes"] retain];
-        nodeEdges = [[coder decodeObjectForKey:@"SGNodeEdges"] retain];
+        nodes = [coder decodeObjectForKey:@"SGNodes"];
+        nodeEdges = [coder decodeObjectForKey:@"SGNodeEdges"];
     }
     return self;
 }
@@ -350,9 +338,7 @@
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     [archiver encodeObject:self forKey:@"SG"];
     [archiver finishEncoding];
-    [archiver release];
     [data writeToFile:path atomically:YES];
-    [data release];
 }
 
 + (SparseGraph *)newFromFile:(NSString*) path {
@@ -361,7 +347,7 @@
     SparseGraph *graph = [unarchiver decodeObjectForKey:@"SG"];
     [unarchiver finishDecoding];
     // TODO: figure out retain vs. autorelease for this
-    return [graph retain];                     
+    return graph;                     
 }
 
 @end

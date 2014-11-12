@@ -23,7 +23,7 @@
     BOOL pathToTargetFound;
 }
 
-@property (nonatomic, retain) SparseGraph *graph;
+@property (nonatomic, strong) SparseGraph *graph;
 @property (nonatomic, readonly) BOOL pathToTargetFound;
 
 - (id)initWithGraph:(SparseGraph *)aGraph 

@@ -36,7 +36,6 @@
 - (void)dealloc {
     free(heap);
     free(invHeap);
-    [super dealloc];
 }
 
 - (BOOL)empty {
