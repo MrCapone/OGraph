@@ -7,7 +7,6 @@
 //
 
 // UIKit is needed for NSValue CGPoint additions
-#import <UIKit/UIKit.h>
 #import "NavGraphNode.h"
 
 @implementation NavGraphNode
