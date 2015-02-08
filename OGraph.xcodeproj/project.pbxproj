@@ -12,9 +12,6 @@
 		0B6752F0137481C100C4BEC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6752E3137481C100C4BEC8 /* Foundation.framework */; };
 		0B6752F2137481C100C4BEC8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6752F1137481C100C4BEC8 /* CoreGraphics.framework */; };
 		0B6752F5137481C100C4BEC8 /* libOGraph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6752E0137481C100C4BEC8 /* libOGraph.a */; };
-		0B6752FB137481C100C4BEC8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B6752F9137481C100C4BEC8 /* InfoPlist.strings */; };
-		0B6752FE137481C100C4BEC8 /* OGraphTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 0B6752FD137481C100C4BEC8 /* OGraphTests.h */; };
-		0B675300137481C100C4BEC8 /* OGraphTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6752FF137481C100C4BEC8 /* OGraphTests.m */; };
 		0B6753201374826000C4BEC8 /* GraphConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B6753091374826000C4BEC8 /* GraphConstants.h */; };
 		0B6753211374826000C4BEC8 /* GraphConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B67530A1374826000C4BEC8 /* GraphConstants.m */; };
 		0B6753221374826000C4BEC8 /* GraphEdge.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B67530B1374826000C4BEC8 /* GraphEdge.h */; };
@@ -41,7 +38,6 @@
 		0BBF32101380683500DFF2FA /* HeuristicManhattan.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BBF320E1380683500DFF2FA /* HeuristicManhattan.h */; };
 		0BBF32111380683500DFF2FA /* HeuristicManhattan.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF320F1380683500DFF2FA /* HeuristicManhattan.m */; };
 		0BBF32121380683500DFF2FA /* HeuristicManhattan.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF320F1380683500DFF2FA /* HeuristicManhattan.m */; };
-		0BBF324E13809C7B00DFF2FA /* mediumMapGraph.data in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF324D13809C7B00DFF2FA /* mediumMapGraph.data */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,11 +57,6 @@
 		0B6752ED137481C100C4BEC8 /* OGraphTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OGraphTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6752EE137481C100C4BEC8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0B6752F1137481C100C4BEC8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0B6752F8137481C100C4BEC8 /* OGraphTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OGraphTests-Info.plist"; sourceTree = "<group>"; };
-		0B6752FA137481C100C4BEC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0B6752FC137481C100C4BEC8 /* OGraphTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OGraphTests-Prefix.pch"; sourceTree = "<group>"; };
-		0B6752FD137481C100C4BEC8 /* OGraphTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OGraphTests.h; sourceTree = "<group>"; };
-		0B6752FF137481C100C4BEC8 /* OGraphTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OGraphTests.m; sourceTree = "<group>"; };
 		0B6753091374826000C4BEC8 /* GraphConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphConstants.h; sourceTree = "<group>"; };
 		0B67530A1374826000C4BEC8 /* GraphConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphConstants.m; sourceTree = "<group>"; };
 		0B67530B1374826000C4BEC8 /* GraphEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphEdge.h; sourceTree = "<group>"; };
@@ -91,7 +82,6 @@
 		0B67531F1374826000C4BEC8 /* SparseGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparseGraph.m; sourceTree = "<group>"; };
 		0BBF320E1380683500DFF2FA /* HeuristicManhattan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeuristicManhattan.h; sourceTree = "<group>"; };
 		0BBF320F1380683500DFF2FA /* HeuristicManhattan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeuristicManhattan.m; sourceTree = "<group>"; };
-		0BBF324D13809C7B00DFF2FA /* mediumMapGraph.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = mediumMapGraph.data; path = testdata/mediumMapGraph.data; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				0B6752E5137481C100C4BEC8 /* OGraph */,
-				0B6752F6137481C100C4BEC8 /* OGraphTests */,
 				0B6752E2137481C100C4BEC8 /* Frameworks */,
 				0B6752E1137481C100C4BEC8 /* Products */,
 			);
@@ -185,35 +174,6 @@
 				0B6752E7137481C100C4BEC8 /* OGraph-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0B6752F6137481C100C4BEC8 /* OGraphTests */ = {
-			isa = PBXGroup;
-			children = (
-				0B6752FD137481C100C4BEC8 /* OGraphTests.h */,
-				0B6752FF137481C100C4BEC8 /* OGraphTests.m */,
-				0BBF324C13809C4D00DFF2FA /* testdata */,
-				0B6752F7137481C100C4BEC8 /* Supporting Files */,
-			);
-			path = OGraphTests;
-			sourceTree = "<group>";
-		};
-		0B6752F7137481C100C4BEC8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0B6752F8137481C100C4BEC8 /* OGraphTests-Info.plist */,
-				0B6752F9137481C100C4BEC8 /* InfoPlist.strings */,
-				0B6752FC137481C100C4BEC8 /* OGraphTests-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0BBF324C13809C4D00DFF2FA /* testdata */ = {
-			isa = PBXGroup;
-			children = (
-				0BBF324D13809C7B00DFF2FA /* mediumMapGraph.data */,
-			);
-			name = testdata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,9 +270,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B6752FB137481C100C4BEC8 /* InfoPlist.strings in Resources */,
-				0B6752FE137481C100C4BEC8 /* OGraphTests.h in Resources */,
-				0BBF324E13809C7B00DFF2FA /* mediumMapGraph.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +315,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B675300137481C100C4BEC8 /* OGraphTests.m in Sources */,
 				0BBF32121380683500DFF2FA /* HeuristicManhattan.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,17 +328,6 @@
 			targetProxy = 0B6752F3137481C100C4BEC8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		0B6752F9137481C100C4BEC8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0B6752FA137481C100C4BEC8 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0B675301137481C100C4BEC8 /* Debug */ = {
